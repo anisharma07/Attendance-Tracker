@@ -1,6 +1,6 @@
-import React from 'react'
-import Logo from "../svg-components/logo";
-import Image from 'next/image'
+import React from "react";
+// import Logo from "../svg-components/logo";
+import Image from "next/image";
 
 const Landing = () => {
   return (
@@ -92,6 +92,6 @@ const Landing = () => {
       />
     </div>
   );
-}
+};
 
-export default Landing
+export default Landing;
