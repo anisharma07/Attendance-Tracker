@@ -1,9 +1,10 @@
 import React from "react";
+import SubCard from "./SubCard";
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center text-[#949494] font-poppins">
-      <p className="mb-4">No records to display</p>
+    <div className="flex flex-col items-center justify-center w-full page-height-class bg-zinc-900 text-[#949494] font-poppins">
+      {/* <p className="mb-4">No records to display</p>
       <div className="flex flex-col items-center">
         <svg
           className="w-[200px] h-[200px] mb-8"
@@ -29,7 +30,22 @@ const Home = () => {
           </defs>
         </svg>
         <p className="text-xl">Click on Add button to add a new subject</p>
-      </div>
+      </div> */}
+      <SubCard
+        attended={4}
+        total={6}
+        Sub_name="DSA"
+        Status="On the track"
+        card_color="#1A5F18"
+      />
+      <div className="h-3"></div>
+      <SubCard
+        attended={9}
+        total={9}
+        Sub_name="DASA"
+        Status="Dubne wala h beta"
+        card_color="#892B2B"
+      />
     </div>
   );
 };
