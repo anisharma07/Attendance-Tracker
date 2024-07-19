@@ -1,3 +1,5 @@
+"use client";
+import { useEffect } from "react";
 import React from "react";
 import "./percentages.css";
 
@@ -6,7 +8,7 @@ interface SubCardProps {
   attended: number;
   total: number;
   Sub_name: string;
-  Status: string;
+  target_percentage: number;
 }
 interface CustomStyle extends React.CSSProperties {
   "--bg-color"?: string;
@@ -18,18 +20,31 @@ const SubCard: React.FC<SubCardProps> = ({
   attended,
   total,
   Sub_name,
-  Status,
+  target_percentage,
 }) => {
-  const percentage = Number(((attended / total) * 100).toFixed(1));
-  const degs = (percentage / 100) * 360;
+  let percentage = Number(((attended / total) * 100).toFixed(1));
+  let Status =
+    target_percentage > percentage ? "Dubne wale ho beta!" : "On the track";
+  let degs = (percentage / 100) * 360;
   const customStyle: CustomStyle = {
     "--bg-color": card_color,
     "--circle-percentage": `${degs}deg`,
   };
+  const markPresent = () => {
+    total = total + 1;
+    attended = attended + 1;
+  };
+  const markAbsent = () => {
+    total = total + 1;
+  };
+  const editModal = () => {
+    console.log("Edit Modal");
+  };
+
   return (
     <div
       style={{ backgroundColor: card_color }}
-      className={` text-white p-4 rounded-lg w-[350px] sm:w-[450px] flex items-center justify-between space-x-4`}
+      className={` text-white p-4 rounded-lg w-[350px] sm:w-[450px] h-[140px] flex items-center justify-between space-x-4`}
     >
       <div>
         <div className="flex items-center space-x-2">
@@ -54,13 +69,15 @@ const SubCard: React.FC<SubCardProps> = ({
           {/* <div className="w-16 h-16 rounded-full border-4 border-teal-500 flex items-center justify-center p-8">
             <span className="text-lg font-semibold">100.0%</span>
           </div> */}
-          <p className="absolute top-[30px] left-0 w-full text-center font-bold">
+          <p className="absolute top-[27px] left-0 w-full text-center font-bold">
             {percentage}%
           </p>
         </div>
         <div className="flex gap-3">
-          <button className="text-[20px]">✅</button>
-          <button className="">
+          <button className="text-[19px]" onClick={markPresent}>
+            ✅
+          </button>
+          <button className="" onClick={markAbsent}>
             <svg
               className="w-6 h-6"
               viewBox="0 0 40 38"
@@ -81,7 +98,7 @@ const SubCard: React.FC<SubCardProps> = ({
               />
             </svg>
           </button>
-          <button className="">
+          <button className="" onClick={editModal}>
             <svg
               className="w-6 h-6"
               viewBox="0 0 40 38"
@@ -89,15 +106,15 @@ const SubCard: React.FC<SubCardProps> = ({
               xmlns="http://www.w3.org/2000/svg"
             >
               <rect
-                x="0.429688"
-                y="0.39917"
+                x="0.431641"
+                y="0.231445"
                 width="39.5605"
                 height="36.8799"
                 rx="8"
                 fill="#0093E5"
               />
               <path
-                d="M20.2109 11.1251C12.6649 11.1251 6.71094 18.8391 6.71094 18.8391C6.71094 18.8391 12.6649 26.5541 20.2109 26.5541C25.9809 26.5541 33.7109 18.8391 33.7109 18.8391C33.7109 18.8391 25.9809 11.1251 20.2109 11.1251ZM20.2109 23.6451C17.5609 23.6451 15.4039 21.4891 15.4039 18.8391C15.4039 16.1891 17.5609 14.0321 20.2109 14.0321C22.8609 14.0321 25.0179 16.1891 25.0179 18.8391C25.0179 21.4891 22.8609 23.6451 20.2109 23.6451ZM20.2109 16.0331C19.8381 16.0261 19.4675 16.0934 19.121 16.2313C18.7744 16.3691 18.4588 16.5746 18.1926 16.8358C17.9265 17.0971 17.715 17.4087 17.5707 17.7526C17.4263 18.0965 17.352 18.4657 17.352 18.8386C17.352 19.2116 17.4263 19.5808 17.5707 19.9247C17.715 20.2685 17.9265 20.5802 18.1926 20.8414C18.4588 21.1026 18.7744 21.3081 19.121 21.446C19.4675 21.5838 19.8381 21.6512 20.2109 21.6441C20.9458 21.6302 21.6459 21.3286 22.1607 20.8039C22.6756 20.2793 22.964 19.5736 22.964 18.8386C22.964 18.1036 22.6756 17.3979 22.1607 16.8733C21.6459 16.3487 20.9458 16.047 20.2109 16.0331Z"
+                d="M8.96191 25.2339V29.9214H13.6494L27.4744 16.0964L22.7869 11.4089L8.96191 25.2339ZM31.0994 12.4714C31.2153 12.3557 31.3072 12.2184 31.37 12.0672C31.4327 11.916 31.465 11.7539 31.465 11.5901C31.465 11.4264 31.4327 11.2643 31.37 11.1131C31.3072 10.9619 31.2153 10.8245 31.0994 10.7089L28.1744 7.78389C28.0588 7.66801 27.9214 7.57608 27.7702 7.51335C27.619 7.45062 27.4569 7.41833 27.2932 7.41833C27.1295 7.41833 26.9673 7.45062 26.8161 7.51335C26.6649 7.57608 26.5276 7.66801 26.4119 7.78389L24.1244 10.0714L28.8119 14.7589L31.0994 12.4714Z"
                 fill="white"
               />
             </svg>
