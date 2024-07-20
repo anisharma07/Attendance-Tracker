@@ -11,7 +11,7 @@ const ActivityCard = () => {
           </div>
           <div className="ml-2">Attendance 3/4</div>
         </div>
-        <div>
+        <a href="./settings/dsa">
           <svg
             className="w-6 h-6"
             viewBox="0 0 40 38"
@@ -31,7 +31,7 @@ const ActivityCard = () => {
               fill="white"
             />
           </svg>
-        </div>
+        </a>
       </div>
     </div>
   );
