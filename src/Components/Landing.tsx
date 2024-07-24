@@ -34,7 +34,7 @@ const Landing = () => {
           }}
           className="text-3xl mt-16"
         >
-          Never Miss an Important Class, Keep Track of your Attendance
+          Never Miss an Important Class, Keep Track of your Schedule
         </p>
       </div>
 
