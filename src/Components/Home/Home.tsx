@@ -19,7 +19,7 @@ import {
 const Home = () => {
   return (
     <div className="flex flex-wrap justify-center gap-4 content-start p-4 w-full  page-height-class bg-zinc-900 text-[#949494] font-poppins">
-      <Modal
+      {/* <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="top-center"
@@ -49,7 +49,7 @@ const Home = () => {
             </>
           )}
         </ModalContent>
-      </Modal>
+      </Modal> */}
       {/* <p className="mb-4">No records to display</p>
       <div className="flex flex-col items-center">
         <svg
