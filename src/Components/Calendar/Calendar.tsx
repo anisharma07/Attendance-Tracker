@@ -1,7 +1,25 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
-const Calendar = () => {
-  return <div className="page-height-class">Calendar</div>;
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+const CalendarComponent = () => {
+  const [value, onChange] = useState<Value>(new Date());
+  return (
+    <div className="page-height-class flex items-center justify-center w-full">
+      <div className="w-full flex items-center justify-center">
+        <Calendar
+          className={"custom-calendar font-poppins"}
+          onChange={onChange}
+          value={value}
+        />
+      </div>
+    </div>
+  );
 };
 
-export default Calendar;
+export default CalendarComponent;

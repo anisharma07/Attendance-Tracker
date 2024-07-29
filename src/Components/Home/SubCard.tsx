@@ -4,7 +4,6 @@ import React from "react";
 import "./percentages.css";
 
 interface SubCardProps {
-  card_color: string;
   attended: number;
   total: number;
   Sub_name: string;
@@ -16,7 +15,6 @@ interface CustomStyle extends React.CSSProperties {
 }
 
 const SubCard: React.FC<SubCardProps> = ({
-  card_color,
   attended,
   total,
   Sub_name,
@@ -24,12 +22,23 @@ const SubCard: React.FC<SubCardProps> = ({
 }) => {
   let percentage = Number(((attended / total) * 100).toFixed(1));
   let Status =
-    target_percentage > percentage ? "Dubne wale ho beta!" : "On the track";
+    target_percentage == percentage
+      ? "On the Edge!"
+      : target_percentage > percentage
+      ? "Low Attendance!!"
+      : "On track";
+  let card_color =
+    target_percentage == percentage
+      ? "#006D90"
+      : target_percentage > percentage
+      ? "#892B2B"
+      : "#1A5F18";
   let degs = (percentage / 100) * 360;
   const customStyle: CustomStyle = {
     "--bg-color": card_color,
     "--circle-percentage": `${degs}deg`,
   };
+
   const markPresent = () => {
     total = total + 1;
     attended = attended + 1;

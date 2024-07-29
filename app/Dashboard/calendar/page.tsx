@@ -1,8 +1,8 @@
-import Calendar from "@/Components/Calendar/Calendar";
+import CalendarComponent from "@/Components/Calendar/Calendar";
 import React from "react";
 
 const page = () => {
-  return <Calendar />;
+  return <CalendarComponent />;
 };
 
 export default page;

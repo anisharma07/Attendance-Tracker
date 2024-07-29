@@ -47,3 +47,38 @@
     transform: translateY(0);
   }
 }
+
+.custom-calendar {
+  width: 400px;
+  min-width: 400px;
+  height: auto;
+  font-size: 1.2rem;
+  /* background-color: #000000; */
+  /* background: #000000; */
+  border-radius: 15px;
+  padding: 20px;
+  color: black;
+}
+
+.custom-calendar .react-calendar__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #27272a; */
+  /* color: white; */
+}
+
+.custom-calendar .react-calendar__month-view__weekdays__weekday {
+  font-weight: bold;
+  color: blue;
+  text-align: center;
+  padding: 10px;
+}
+.custom-calendar .react-calendar__tile--now {
+  background-color: rgb(255, 255, 64);
+  color: red;
+}
+.custom-calendar .react-calendar__month-view__days__day:nth-child(7n-1), /* Sunday */
+.custom-calendar .react-calendar__month-view__days__day:nth-child(7n) {
+  color: #ff0000; /* Change to desired text color */
+}
