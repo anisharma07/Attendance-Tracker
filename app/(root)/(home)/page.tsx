@@ -20,12 +20,14 @@ interface UserData {
 const Page: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
         const userDoc = doc(db, "users", currentUser.uid);
+        setUserId(currentUser.uid);
         const userDocSnap = await getDoc(userDoc);
         if (userDocSnap.exists()) {
           setUserData(userDocSnap.data() as UserData);
@@ -56,7 +58,7 @@ const Page: React.FC = () => {
   return !user ? (
     <Landing login={handleLogin} />
   ) : (
-    <Home logout={handleLogout} user={user} userData={userData} />
+    <Home logout={handleLogout} user={user} userData={userData} Id={userId} />
   );
 };
 

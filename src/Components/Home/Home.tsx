@@ -32,16 +32,17 @@ interface HomeProps {
   logout: () => void;
   user: any;
   userData: any;
+  Id: any;
 }
 
-const Home: React.FC<HomeProps> = ({ logout, user, userData }) => {
+const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
   const [toggle, setToggle] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isData, setIsData] = useState(false);
   console.log("userData", userData);
   const [subjectDetails, setSubjectDetails] = useState(initialSubjectDetails);
-  const [userId, setUserId] = useState("fdsfdsfasdfsdfsds");
+  const [userId, setUserId] = useState(Id);
   useEffect(() => {
     if (userData) {
       setSubjectDetails(userData.Attendance || initialSubjectDetails);
