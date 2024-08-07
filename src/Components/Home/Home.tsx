@@ -6,6 +6,8 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface SubjectDetail {
   attended: number;
@@ -40,7 +42,6 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isData, setIsData] = useState(false);
-  console.log("userData", userData);
   const [subjectDetails, setSubjectDetails] = useState(initialSubjectDetails);
   const [userId, setUserId] = useState(Id);
   useEffect(() => {
@@ -50,7 +51,6 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
     }
   }, [userData]);
 
-  console.log("uid", userId);
   useEffect(() => {
     if (subjectDetails.length === 0) {
       setIsData(false);
@@ -63,9 +63,27 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
     try {
       const userDocRef = doc(db, "users", userId);
       await setDoc(userDocRef, { Attendance: subjectDetails }, { merge: true });
-      console.log("Update successful");
+      toast.success("Attendance updated!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     } catch (error) {
-      console.error("Update failed", error);
+      toast.error("Failed to update details!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
