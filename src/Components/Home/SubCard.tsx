@@ -14,6 +14,7 @@ interface SubCardProps {
   changeName: (newName: string) => void;
   setPresent: (present: number) => void;
   setTotal: (total: number) => void;
+  deleteSubject: () => void;
 }
 interface CustomStyle extends React.CSSProperties {
   "--bg-color"?: string;
@@ -30,6 +31,7 @@ const SubCard: React.FC<SubCardProps> = ({
   changeName,
   setTotal,
   setPresent,
+  deleteSubject,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   let percentage =
@@ -59,8 +61,14 @@ const SubCard: React.FC<SubCardProps> = ({
   return (
     <div
       style={{ backgroundColor: card_color }}
-      className={` text-white p-4 rounded-lg w-[100%] sm:w-[450px] h-[140px] flex items-center justify-between space-x-4`}
+      className={`relative text-white p-4 rounded-lg w-[100%] sm:w-[450px] h-[140px] flex items-center justify-between space-x-4`}
     >
+      <button
+        className="text-white absolute top-0 right-2 text-[16px] cursor-pointer"
+        onClick={deleteSubject}
+      >
+        x
+      </button>
       <EditModal
         isOpen={isOpen}
         setOpen={setIsOpen}

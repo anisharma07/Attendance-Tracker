@@ -1,15 +1,27 @@
 import React from "react";
 
-const ActivityCard = () => {
+interface ActivityCardProps {
+  attended: number;
+  total: number;
+  sub_name: string;
+}
+
+const ActivityCard: React.FC<ActivityCardProps> = ({
+  attended,
+  total,
+  sub_name,
+}) => {
   return (
     <div className="p-2">
       <div className="w-full bg-[#171721] flex justify-between items-center p-2 pl-4 rounded-md">
         <div className="flex flex-col items-start">
           <div className="text-lg font-semibold ml-2 relative mb-1">
-            DSA
+            {sub_name}
             <div className="bg-[#4BAB00] h-full w-[3px] absolute top-0 left-[-8px]"></div>
           </div>
-          <div className="ml-2">Attendance 3/4</div>
+          <div className="ml-2">
+            Attendance {attended}/{total}
+          </div>
         </div>
         <a href="./settings/dsa">
           <svg

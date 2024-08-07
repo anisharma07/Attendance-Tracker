@@ -39,6 +39,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
   const [toggle, setToggle] = useState(false);
+  const [hasChanges, setHasChanges] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isData, setIsData] = useState(false);
@@ -73,6 +74,7 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
         progress: undefined,
         theme: "dark",
       });
+      setHasChanges(false);
     } catch (error) {
       toast.error("Failed to update details!", {
         position: "top-center",
@@ -92,27 +94,32 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
     newDetails[index].attended += 1;
     newDetails[index].total += 1;
     setSubjectDetails(newDetails);
+    setHasChanges(true);
   };
 
   const markAbsent = (index: number) => {
     const newDetails = [...subjectDetails];
     newDetails[index].total += 1;
     setSubjectDetails(newDetails);
+    setHasChanges(true);
   };
   const changeName = (index: number, newName: string) => {
     const newDetails = [...subjectDetails];
     newDetails[index].Sub_name = newName;
     setSubjectDetails(newDetails);
+    setHasChanges(true);
   };
   const setTotal = (index: number, total: number) => {
     const newDetails = [...subjectDetails];
     newDetails[index].total = total;
     setSubjectDetails(newDetails);
+    setHasChanges(true);
   };
   const setPresents = (index: number, present: number) => {
     const newDetails = [...subjectDetails];
     newDetails[index].attended = present;
     setSubjectDetails(newDetails);
+    setHasChanges(true);
   };
   const addSubjectDetail = (newDetail: {
     Sub_name: string;
@@ -122,9 +129,28 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
   }) => {
     const newDetails = [...subjectDetails, newDetail];
     setSubjectDetails(newDetails);
+    setHasChanges(true);
+  };
+  const deleteSubject = (index: number) => {
+    const newDetails = [...subjectDetails];
+    newDetails.splice(index, 1);
+    setSubjectDetails(newDetails);
+    setHasChanges(true);
   };
   return (
     <main className="flex flex-col justify-between w-full bg-zinc-900 text-zinc-300 relative">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <nav className="flex items-center h-[60px] justify-between p-4 bg-zinc-800 relative">
         <div className="flex items-center gap-2">
           <img src="/assets/images/logo.png" alt="logo" className="w-12 mr-2" />
@@ -161,12 +187,14 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
         </div>
       </nav>
       <div className="w-full mt-10 mb-10">
-        <button
-          className="p-2 bg-white text-black"
-          onClick={updateUserAttendance}
-        >
-          save us
-        </button>
+        {hasChanges && (
+          <button
+            className="absolute top-[70px] right-4 p-1 rounded-lg text-white font-poppins font-medium text-[14px] bg-[#098500] hover:bg-[#086d00] transition-all duration-300 ease-in-out"
+            onClick={updateUserAttendance}
+          >
+            Save Changes
+          </button>
+        )}
         <Modal
           isOpen={isOpen}
           setOpen={setIsOpen}
@@ -225,6 +253,7 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
                 changeName={(newName: string) => changeName(index, newName)}
                 setTotal={(total: number) => setTotal(index, total)}
                 setPresent={(present: number) => setPresents(index, present)}
+                deleteSubject={() => deleteSubject(index)}
               />
             ))}
 
