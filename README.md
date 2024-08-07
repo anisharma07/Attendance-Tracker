@@ -44,7 +44,3 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 6. Open your browser and visit `http://localhost:3000` to access the Attendance Tracker web app.
 
 That's it! You have successfully set up the Attendance Tracker web app using Next.js.
-
-```
-
-```
