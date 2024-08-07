@@ -9,7 +9,7 @@ const Settings = () => {
         className="w-[200px] mb-2"
       />
       <p className="gradient-profile-text font-semibold text-[25px] mb-6">
-        Santa Clause
+        User Profile
       </p>
       <div className="bg-[#23252c] p-4 w-[90%] max-w-[1200px] h-full rounded-md relative mb-[40px]">
         <p className="text-xl font-semibold ml-2">Your Activity</p>
