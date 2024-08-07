@@ -20,9 +20,9 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="flex items-center h-[60px] justify-around p-4 bg-zinc-800">
+    <footer className="fixed bottom-0 left-0 flex items-center w-full h-[60px] justify-around p-4 bg-zinc-800">
       <a
-        href="/dashboard/calendar"
+        href="/calendar"
         className={`${active_class == 1 ? "text-blue-500" : "text-zinc-300"}`}
       >
         <svg
@@ -36,13 +36,13 @@ const Footer = () => {
         </svg>
       </a>
       <a
-        href="/dashboard"
+        href="/"
         className={`${active_class == 2 ? "text-blue-500" : "text-zinc-300"}`}
       >
         <HomeSvg />
       </a>
       <a
-        href="/dashboard/settings"
+        href="/settings"
         className={`${active_class == 3 ? "text-blue-500" : "text-zinc-300"}`}
       >
         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">

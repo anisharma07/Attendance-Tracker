@@ -24,12 +24,12 @@ const Navbar = () => {
           <li
             className={`font-poppins font-regular cursor-pointer text-[16px] mb-4 text-white text-dimWhite py-1 px-2`}
           >
-            <a href="/dashboard">Set Target</a>
+            <a href="/">Set Target</a>
           </li>
           <li
             className={`font-poppins font-regular cursor-pointer text-[16px] mb-4 text-white text-dimWhite py-1 px-2`}
           >
-            <a href="/dashboard">Add Subject</a>
+            <a href="/">Add Subject</a>
           </li>
 
           <li className="text-white bg-red-800 py-1 px-2 rounded-[25px] font-poppins font-medium cursor-pointer text-[16px]">

@@ -10,7 +10,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const CalendarComponent = () => {
   const [value, onChange] = useState<Value>(new Date());
   return (
-    <div className="page-height-class flex items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full pt-24">
       <div className="w-full flex items-center justify-center">
         <Calendar
           className={"custom-calendar font-poppins"}

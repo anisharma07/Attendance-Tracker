@@ -2,7 +2,7 @@ import React from "react";
 import ActivityCard from "./ActivityCard";
 const Settings = () => {
   return (
-    <div className="flex flex-col items-center p-4 page-height-class relative">
+    <div className="flex flex-col items-center p-4 page-height-class relative ">
       <img
         src="/assets/images/profile.png"
         alt="profile"

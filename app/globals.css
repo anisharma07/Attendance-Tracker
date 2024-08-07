@@ -4,8 +4,8 @@
 @tailwind utilities;
 
 .page-height-class {
-  height: calc(100svh - 120px);
-  overflow: auto;
+  /* height: calc(100vh - 120px); */
+  margin-bottom: 69px;
 }
 .gradient-profile-text {
   background: linear-gradient(90deg, #0097a1 0%, #ffffff 100%);

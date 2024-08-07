@@ -2,7 +2,11 @@ import React from "react";
 // import Logo from "../svg-components/logo";
 import Image from "next/image";
 
-const Landing = () => {
+interface LandingProps {
+  login: () => void;
+}
+
+const Landing: React.FC<LandingProps> = ({ login }) => {
   return (
     <div className=" flex flex-col items-center justify-between font-medium bg-[#171721] font-poppins w-full min-h-[100svh] text-white">
       <div className="absolute top-2 right-4">
@@ -38,10 +42,11 @@ const Landing = () => {
         </p>
       </div>
 
-      <button className="bg-[#1F222B] rounded-full flex items-center px-8 my-8 py-4 gap-4 text-2xl">
-        <a href="/dashboard" className="grow my-auto">
-          Get Started
-        </a>
+      <button
+        className="bg-[#1F222B] rounded-full flex items-center px-8 my-8 py-4 gap-4 text-2xl"
+        onClick={login}
+      >
+        <p className="grow my-auto">Get Started</p>
         <svg
           width="35"
           height="35"

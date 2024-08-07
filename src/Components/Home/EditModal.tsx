@@ -1,25 +1,29 @@
 import React from "react";
 import { useState } from "react";
-interface ModalProps {
+interface EditModalProps {
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  addSubject: (newDetail: {
-    Sub_name: string;
-    target_percentage: number;
+  subject: {
     attended: number;
     total: number;
-  }) => void;
+    Sub_name: string;
+    setPresent: (present: number) => void;
+    setTotal: (total: number) => void;
+    changeName: (newName: string) => void;
+  };
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, setOpen, addSubject }) => {
-  const initialDetails = {
-    attended: 0,
-    total: 0,
-    Sub_name: "",
-    target_percentage: 75,
-  };
-  const [details, setDetails] = useState(initialDetails);
-  const addSub = () => {
+const EditModal: React.FC<EditModalProps> = ({
+  isOpen,
+  setOpen,
+  subject: { attended, total, Sub_name, setPresent, setTotal, changeName },
+}) => {
+  const [details, setDetails] = useState({
+    attended: attended,
+    total: total,
+    Sub_name: Sub_name,
+  });
+  const saveEdit = () => {
     if (!details.attended) {
       details.attended = 0;
     }
@@ -29,16 +33,17 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setOpen, addSubject }) => {
     if (details.attended > details.total) {
       details.total = details.attended;
     }
-    addSubject(details);
-    setDetails(initialDetails);
+    setTotal(details.total);
+    setPresent(details.attended);
+    changeName(details.Sub_name);
     setOpen(false);
   };
   if (!isOpen) return null;
 
   return (
-    <div className="fixed top-0 left-0 z-[100] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white">
+    <div className="fixed top-0 left-0 z-[100] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-regular">
       <div className="p-6 rounded-lg shadow-lg w-80 bg-[#1F222B]">
-        <h2 className="text-lg font-semibold text-foreground">Add Subject</h2>
+        <h2 className="text-lg font-semibold text-foreground">Edit Subject</h2>
         <div className="mt-4">
           <label className="block text-muted-foreground" htmlFor="subject-name">
             Subject Name:
@@ -46,12 +51,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setOpen, addSubject }) => {
           <input
             type="text"
             id="subject-name"
+            placeholder="Eg. Data structures"
             value={details.Sub_name}
             onChange={(e) =>
               setDetails({ ...details, Sub_name: e.target.value })
             }
-            placeholder="Eg. Data structures"
-            className="mt-1 p-2 border border-black rounded w-full text-black"
+            className="mt-1 p-2 border border-border rounded w-full text-black"
           />
         </div>
         <div className="mt-4">
@@ -64,14 +69,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setOpen, addSubject }) => {
           <input
             type="number"
             id="total-classes"
-            value={details.total}
             onChange={(e) =>
               setDetails({
                 ...details,
                 total: Math.max(0, parseInt(e.target.value)),
               })
             }
-            className="mt-1 p-2 border border-black rounded w-full text-black"
+            value={details.total}
+            className="mt-1 p-2 border border-border rounded w-full text-black"
           />
         </div>
         <div className="mt-4">
@@ -91,7 +96,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setOpen, addSubject }) => {
                 ),
               });
             }}
-            className="mt-1 p-2 border border-black rounded w-full text-black"
+            className="mt-1 p-2 border border-border rounded w-full text-black"
           />
         </div>
 
@@ -103,10 +108,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setOpen, addSubject }) => {
             CANCEL
           </button>
           <button
-            onClick={addSub}
+            onClick={saveEdit}
             className="bg-primary text-primary-foreground hover:bg-primary/80 p-2 rounded bg-[#008315]"
           >
-            ADD
+            SAVE
           </button>
         </div>
       </div>
@@ -114,4 +119,4 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setOpen, addSubject }) => {
   );
 };
 
-export default Modal;
+export default EditModal;

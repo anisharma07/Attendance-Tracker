@@ -1,13 +1,19 @@
 "use client";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import "./percentages.css";
+import EditModal from "./EditModal";
 
 interface SubCardProps {
+  Sub_name: string;
   attended: number;
   total: number;
-  Sub_name: string;
   target_percentage: number;
+  markPresent: () => void;
+  markAbsent: () => void;
+  changeName: (newName: string) => void;
+  setPresent: (present: number) => void;
+  setTotal: (total: number) => void;
 }
 interface CustomStyle extends React.CSSProperties {
   "--bg-color"?: string;
@@ -19,8 +25,15 @@ const SubCard: React.FC<SubCardProps> = ({
   total,
   Sub_name,
   target_percentage,
+  markPresent,
+  markAbsent,
+  changeName,
+  setTotal,
+  setPresent,
 }) => {
-  let percentage = Number(((attended / total) * 100).toFixed(1));
+  const [isOpen, setIsOpen] = useState(false);
+  let percentage =
+    total > 0 ? Number(((attended / total) * 100).toFixed(1)) : 100;
   let Status =
     target_percentage == percentage
       ? "On the Edge!"
@@ -39,29 +52,35 @@ const SubCard: React.FC<SubCardProps> = ({
     "--circle-percentage": `${degs}deg`,
   };
 
-  const markPresent = () => {
-    total = total + 1;
-    attended = attended + 1;
-  };
-  const markAbsent = () => {
-    total = total + 1;
-  };
   const editModal = () => {
-    console.log("Edit Modal");
+    setIsOpen(true);
   };
 
   return (
     <div
       style={{ backgroundColor: card_color }}
-      className={` text-white p-4 rounded-lg w-[350px] sm:w-[450px] h-[140px] flex items-center justify-between space-x-4`}
+      className={` text-white p-4 rounded-lg w-[100%] sm:w-[450px] h-[140px] flex items-center justify-between space-x-4`}
     >
+      <EditModal
+        isOpen={isOpen}
+        setOpen={setIsOpen}
+        subject={{
+          attended,
+          total,
+          Sub_name,
+          setPresent,
+          setTotal,
+          changeName,
+        }}
+      />
+
       <div>
         <div className="flex items-center space-x-2">
           <div className="w-1 h-6 bg-green-500"></div>
           <h2 className="text-lg font-semibold">{Sub_name}</h2>
         </div>
         <div className="mt-2">
-          <p className="text-xl font-bold">
+          <p className="text-lg sm:text-xl font-semibold sm:font-bold">
             Attendance{" "}
             <span className="text-3xl">
               {attended}/{total}

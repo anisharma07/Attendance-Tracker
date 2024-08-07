@@ -28,7 +28,7 @@ const page = () => {
             </svg>
           </a>
         </div>
-        <div className="w-full bg-[#23252c] p-4 rounded-md flex justify-evenly items-center text-[21px] font-medium">
+        <div className="w-full bg-[#23252c] p-4 rounded-md flex justify-evenly items-center text-[18px] sm:text-[21px] font-medium mb-6">
           <p>Date</p>
           <p>Time</p>
           <p>Status</p>
