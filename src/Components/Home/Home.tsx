@@ -34,21 +34,18 @@ interface HomeProps {
   logout: () => void;
   user: any;
   userData: any;
-  Id: any;
 }
 
-const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
+const Home: React.FC<HomeProps> = ({ logout, user, userData }) => {
   const [toggle, setToggle] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isData, setIsData] = useState(false);
   const [subjectDetails, setSubjectDetails] = useState(initialSubjectDetails);
-  const [userId, setUserId] = useState(Id);
   useEffect(() => {
     if (userData) {
       setSubjectDetails(userData.Attendance || initialSubjectDetails);
-      setUserId(userData.uid);
     }
   }, [userData]);
 
@@ -62,8 +59,8 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
 
   const updateUserAttendance = async () => {
     try {
-      const userDocRef = doc(db, "users", userId);
-      await setDoc(userDocRef, { Attendance: subjectDetails }, { merge: true });
+      const userDocRef = doc(db, "users", user.uid);
+      await setDoc(userDocRef, { Attendance: subjectDetails });
       toast.success("Attendance updated!", {
         position: "top-center",
         autoClose: 5000,
@@ -86,6 +83,7 @@ const Home: React.FC<HomeProps> = ({ logout, user, userData, Id }) => {
         progress: undefined,
         theme: "dark",
       });
+      console.error("Error updating document: ", error);
     }
   };
 
