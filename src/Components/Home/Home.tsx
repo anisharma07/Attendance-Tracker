@@ -149,7 +149,7 @@ const Home: React.FC<HomeProps> = ({ user, userData }) => {
       <div className="w-full mt-10 mb-10">
         {hasChanges && (
           <button
-            className="absolute top-[70px] right-4 p-1 rounded-lg text-white font-poppins font-medium text-[14px] bg-[#098500] hover:bg-[#086d00] transition-all duration-300 ease-in-out"
+            className="absolute top-[11px] right-4 p-1 rounded-lg text-white font-poppins font-medium text-[14px] bg-[#098500] hover:bg-[#086d00] transition-all duration-300 ease-in-out"
             onClick={updateUserAttendance}
           >
             Save Changes
