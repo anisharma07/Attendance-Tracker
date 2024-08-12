@@ -230,7 +230,7 @@ const Home: React.FC<HomeProps> = ({ updateuserData, user, userData }) => {
                 setTotal={(total: number) => setTotal(index, total)}
                 setPresent={(present: number) => setPresents(index, present)}
                 deleteSubject={() => deleteSubject(index)}
-                card_delay={index*100}
+                card_delay={index/10}
               />
             ))}
 

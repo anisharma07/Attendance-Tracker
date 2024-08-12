@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import "./percentages.css";
 import EditModal from "./EditModal";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import {motion} from "framer-motion";
 
 interface SubCardProps {
   Sub_name: string;
@@ -61,17 +60,18 @@ const SubCard: React.FC<SubCardProps> = ({
   const editModal = () => {
     setIsOpen(true);
   };
-  useEffect(() => {
-    AOS.init({ duration: 600, offset: 50, once: true });
-    window.onload = () => {
-      AOS.refreshHard();
-    };
-  }, []);
+
   return (
-    <div
+    <motion.div
       style={{  position: "relative" }}
       className=" w-full sm:w-[450px] min-h-[140px]"
-     
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.8,
+        delay: card_delay,
+        ease: [0, 0.71, 0.2, 1.01],
+      }}
     >
       
       <EditModal
@@ -88,8 +88,7 @@ const SubCard: React.FC<SubCardProps> = ({
       />
       <div
         style={{backgroundColor: card_color}}
-        className="text-white rounded-lg shadow-lg p-4 w-full h-full flex items-center justify-between" data-aos="fade-up"
-        data-aos-delay={card_delay}>
+        className="text-white rounded-lg shadow-lg p-4 w-full h-full flex items-center justify-between">
         <button
         className="text-white absolute top-0 right-2 text-[16px] cursor-pointer"
         onClick={deleteSubject}
@@ -172,7 +171,7 @@ const SubCard: React.FC<SubCardProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
