@@ -63,6 +63,9 @@ const SubCard: React.FC<SubCardProps> = ({
   };
   useEffect(() => {
     AOS.init({ duration: 600, offset: 50, once: true });
+    window.onload = () => {
+      AOS.refreshHard();
+    };
   }, []);
   return (
     <div
