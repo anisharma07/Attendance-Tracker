@@ -7,8 +7,9 @@ interface SettingsProps {
   name: string | null;
   photo: string | null;
   uid: string;
+  handleLogout: () => void;
 }
-const Settings: React.FC<SettingsProps> = ({ name, photo, uid }) => {
+const Settings: React.FC<SettingsProps> = ({ name, photo, uid, handleLogout }) => {
   return (
     <div className="flex flex-col items-center p-4 page-height-class relative ">
      {photo && <img
@@ -27,9 +28,9 @@ const Settings: React.FC<SettingsProps> = ({ name, photo, uid }) => {
         {/* <ActivityCard attended={7} total={8} sub_name="Algorithms" /> */}
         <ActivityCard attended={2} total={2} sub_name="Graphics" />
 
-        <div className="underline text-[#0070B1] absolute bottom-[-35px] right-0">
+        <button onClick={handleLogout} className="underline text-[#0070B1] absolute bottom-[-35px] right-0 cursor-pointer">
           Log Out?
-        </div>
+        </button>
       </div>
     </div>
   );

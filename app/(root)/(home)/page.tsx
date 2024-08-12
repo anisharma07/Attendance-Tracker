@@ -73,7 +73,7 @@ setLoading(true);
           <Navbar toggle={toggle}  setToggle={setToggle} handleLogout={handleLogout}/>
       {activeRoute === "home" && <Home user={user} userData={userData} />} 
       {activeRoute === "calendar" && <Calendar />}
-        {activeRoute === "settings" && <Settings name={user.displayName} photo={user.photoURL} uid={user.uid} />}
+          {activeRoute === "settings" && <Settings handleLogout={handleLogout} name={user.displayName} photo={user.photoURL} uid={user.uid} />}
         <Footer activeRoute={activeRoute} changeActiveRoute={setActiveRoute} />
         
       </main>

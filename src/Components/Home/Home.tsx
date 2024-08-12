@@ -6,6 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loading from "../Loading";
 
 interface SubjectDetail {
   attended: number;
@@ -39,19 +40,25 @@ const Home: React.FC<HomeProps> = ({ user, userData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isData, setIsData] = useState(false);
   const [subjectDetails, setSubjectDetails] = useState(initialSubjectDetails);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    setLoading(true);
     if (userData) {
       setSubjectDetails(userData.Attendance || initialSubjectDetails);
       
     }
+    setLoading(false);
   }, [userData]);
 
   useEffect(() => {
+    setLoading(true);
     if (subjectDetails.length === 0) {
       setIsData(false);
     } else {
       setIsData(true);
     }
+    setLoading(false);
   }, [subjectDetails]);
 
   const updateUserAttendance = async () => {
@@ -99,24 +106,28 @@ const Home: React.FC<HomeProps> = ({ user, userData }) => {
     setSubjectDetails(newDetails);
     setHasChanges(true);
   };
+
   const changeName = (index: number, newName: string) => {
     const newDetails = [...subjectDetails];
     newDetails[index].Sub_name = newName;
     setSubjectDetails(newDetails);
     setHasChanges(true);
   };
+
   const setTotal = (index: number, total: number) => {
     const newDetails = [...subjectDetails];
     newDetails[index].total = total;
     setSubjectDetails(newDetails);
     setHasChanges(true);
   };
+
   const setPresents = (index: number, present: number) => {
     const newDetails = [...subjectDetails];
     newDetails[index].attended = present;
     setSubjectDetails(newDetails);
     setHasChanges(true);
   };
+
   const addSubjectDetail = (newDetail: {
     Sub_name: string;
     target_percentage: number;
@@ -127,13 +138,15 @@ const Home: React.FC<HomeProps> = ({ user, userData }) => {
     setSubjectDetails(newDetails);
     setHasChanges(true);
   };
+
   const deleteSubject = (index: number) => {
     const newDetails = [...subjectDetails];
     newDetails.splice(index, 1);
     setSubjectDetails(newDetails);
     setHasChanges(true);
   };
-  return (
+
+  return loading?  <div className="w-full min-h-[70vh] flex items-center justify-center"><div className="loader"></div></div>   :(
     <main className="flex flex-col justify-between w-full bg-zinc-900 text-zinc-300 relative">
       <ToastContainer
         position="top-center"
