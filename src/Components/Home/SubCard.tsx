@@ -62,7 +62,7 @@ const SubCard: React.FC<SubCardProps> = ({
     setIsOpen(true);
   };
   useEffect(() => {
-    AOS.init({ duration: 600, offset: 50 });
+    AOS.init({ duration: 600, offset: 50, once: true });
   }, []);
   return (
     <div
