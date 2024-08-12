@@ -69,17 +69,11 @@ const SubCard: React.FC<SubCardProps> = ({
   }, []);
   return (
     <div
-      style={{ backgroundColor: card_color, position: "relative" }}
-      className="rounded-lg w-full sm:w-[450px] min-h-[140px] shadow-lg"
-      data-aos="fade-up"
-      data-aos-delay={card_delay}
+      style={{  position: "relative" }}
+      className=" w-full sm:w-[450px] min-h-[140px]"
+     
     >
-      <button
-        className="text-white absolute top-0 right-2 text-[16px] cursor-pointer"
-        onClick={deleteSubject}
-      >
-        x
-      </button>
+      
       <EditModal
         isOpen={isOpen}
         setOpen={setIsOpen}
@@ -92,7 +86,16 @@ const SubCard: React.FC<SubCardProps> = ({
           changeName,
         }}
       />
-      <div className="text-white p-4 w-full h-full flex items-center justify-between">
+      <div
+        style={{backgroundColor: card_color}}
+        className="text-white rounded-lg shadow-lg p-4 w-full h-full flex items-center justify-between" data-aos="fade-up"
+        data-aos-delay={card_delay}>
+        <button
+        className="text-white absolute top-0 right-2 text-[16px] cursor-pointer"
+        onClick={deleteSubject}
+      >
+        x
+      </button>
         <div>
           <div className="flex items-center space-x-2">
             <div className="w-1 h-6 bg-green-500"></div>

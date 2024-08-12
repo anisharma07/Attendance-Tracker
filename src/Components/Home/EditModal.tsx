@@ -41,7 +41,7 @@ const EditModal: React.FC<EditModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed top-0 left-0 z-[100] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-regular">
+    <div className="fixed top-0 left-0 z-[1000] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-regular">
       <div className="p-6 rounded-lg shadow-lg w-80 bg-[#1F222B]">
         <h2 className="text-lg font-semibold text-foreground">Edit Subject</h2>
         <div className="mt-4">

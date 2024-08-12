@@ -42,6 +42,7 @@ const Home: React.FC<HomeProps> = ({ user, userData }) => {
   useEffect(() => {
     if (userData) {
       setSubjectDetails(userData.Attendance || initialSubjectDetails);
+      
     }
   }, [userData]);
 
@@ -55,6 +56,7 @@ const Home: React.FC<HomeProps> = ({ user, userData }) => {
 
   const updateUserAttendance = async () => {
     try {
+      
       const userDocRef = doc(db, "users", user.uid);
       await setDoc(userDocRef, { Attendance: subjectDetails });
       toast.success("Attendance updated!", {
