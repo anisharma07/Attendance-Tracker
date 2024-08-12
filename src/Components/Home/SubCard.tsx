@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import React from "react";
 import "./percentages.css";
 import EditModal from "./EditModal";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 interface SubCardProps {
   Sub_name: string;
@@ -57,11 +59,14 @@ const SubCard: React.FC<SubCardProps> = ({
   const editModal = () => {
     setIsOpen(true);
   };
-
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
   return (
     <div
       style={{ backgroundColor: card_color, position: "relative" }}
-      className="rounded-lg"
+      className="rounded-lg w-full sm:w-[450px] min-h-[140px] shadow-lg"
+      data-aos="fade-up"
     >
       <button
         className="text-white absolute top-0 right-2 text-[16px] cursor-pointer"
@@ -81,7 +86,7 @@ const SubCard: React.FC<SubCardProps> = ({
           changeName,
         }}
       />
-      <div className="text-white p-4 w-[100%] sm:w-[450px] h-[140px] flex items-center justify-between space-x-4">
+      <div className="text-white p-4 w-full h-full flex items-center justify-between">
         <div>
           <div className="flex items-center space-x-2">
             <div className="w-1 h-6 bg-green-500"></div>

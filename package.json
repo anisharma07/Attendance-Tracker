@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0 -p 3000",
     "build": "next build",
     "lint": "next lint"
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.6",
+    "aos": "^2.3.4",
     "dotenv": "^16.4.5",
     "firebase": "^10.12.5",
     "lucide-react": "^0.414.0",
