@@ -6,7 +6,7 @@ const Settings = () => {
       <img
         src="/assets/images/profile.png"
         alt="profile"
-        className="w-[200px] mb-2"
+        className="w-[200px] h-[200px] mb-2"
       />
       <p className="gradient-profile-text font-semibold text-[25px] mb-6">
         User Profile
