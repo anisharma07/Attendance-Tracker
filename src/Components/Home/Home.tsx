@@ -32,9 +32,10 @@ const initialSubjectDetails: SubjectDetail[] = [
 interface HomeProps {
   user: any;
   userData: any;
+  updateuserData: (data: any) => void;
 }
 
-const Home: React.FC<HomeProps> = ({ user, userData }) => {
+const Home: React.FC<HomeProps> = ({ updateuserData, user, userData }) => {
   const [hasChanges, setHasChanges] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +47,6 @@ const Home: React.FC<HomeProps> = ({ user, userData }) => {
     setLoading(true);
     if (userData) {
       setSubjectDetails(userData.Attendance || initialSubjectDetails);
-      
     }
     setLoading(false);
   }, [userData]);
@@ -76,6 +76,7 @@ const Home: React.FC<HomeProps> = ({ user, userData }) => {
         progress: undefined,
         theme: "dark",
       });
+      updateuserData(subjectDetails);
       setHasChanges(false);
     } catch (error) {
       toast.error("Failed to update details!", {

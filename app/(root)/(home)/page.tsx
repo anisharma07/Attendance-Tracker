@@ -19,6 +19,7 @@ interface UserData {
   total: number;
   Sub_name: string;
   target_percentage: number;
+  Attendance: any;
 }
 import Navbar from "@/Components/Navbar";
 
@@ -28,6 +29,11 @@ const Page: React.FC = () => {
   const [toggle, setToggle] = useState(false);
   const [activeRoute, setActiveRoute] = useState("home");
   const [loading, setLoading] = useState(true);
+
+  const updateUserData = (subjectDetails:any) => {
+    userData? userData.Attendance = subjectDetails : null;
+   setUserData(userData);
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -71,7 +77,7 @@ setLoading(true);
   ): (
     <main className="flex flex-col justify-between w-full bg-zinc-900 text-zinc-300 relative">
           <Navbar toggle={toggle}  setToggle={setToggle} handleLogout={handleLogout}/>
-      {activeRoute === "home" && <Home user={user} userData={userData} />} 
+      {activeRoute === "home" && <Home updateuserData={updateUserData} user={user} userData={userData} />} 
       {activeRoute === "calendar" && <Calendar />}
           {activeRoute === "settings" && <Settings handleLogout={handleLogout} name={user.displayName} photo={user.photoURL} uid={user.uid} />}
         <Footer activeRoute={activeRoute} changeActiveRoute={setActiveRoute} />
