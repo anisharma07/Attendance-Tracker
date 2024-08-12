@@ -17,6 +17,7 @@ interface SubCardProps {
   setPresent: (present: number) => void;
   setTotal: (total: number) => void;
   deleteSubject: () => void;
+  card_delay: number;
 }
 interface CustomStyle extends React.CSSProperties {
   "--bg-color"?: string;
@@ -34,6 +35,7 @@ const SubCard: React.FC<SubCardProps> = ({
   setTotal,
   setPresent,
   deleteSubject,
+  card_delay,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   let percentage =
@@ -67,6 +69,7 @@ const SubCard: React.FC<SubCardProps> = ({
       style={{ backgroundColor: card_color, position: "relative" }}
       className="rounded-lg w-full sm:w-[450px] min-h-[140px] shadow-lg"
       data-aos="fade-up"
+      data-aos-delay={card_delay}
     >
       <button
         className="text-white absolute top-0 right-2 text-[16px] cursor-pointer"
